@@ -97,7 +97,19 @@ Licensed under the MIT license
 			        		if(data.data.length) {
 				        		
 			        			// define user namespace
-				        		var thisUser = data.data[0];
+				        		//var thisUser = data.data[0];
+							//The previous instruction fails when data returns more than one result
+
+				        		
+							var thisUser;
+							
+							for (i = 0; i < data.data.length; i++) {
+								if (data.data[i].username == s.username) {
+									thisUser = data.data[i];
+									break;
+								}
+							}
+				        		
 				        		
 			        			// construct API endpoint
 								var url = 'https://api.instagram.com/v1/users/'+thisUser.id+'/media/recent/?client_id='+s.clientID+'&count='+s.limit+'&callback=?';
